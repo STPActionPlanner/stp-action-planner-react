@@ -53,7 +53,7 @@ const PlannerContextProvider = ({children}) => {
     if (!planner.goals.some(goal => goal.id === goal._id)) {
       setPlanner({
         ...planner,
-        goals: [...planner.goals, {id: goal._id, name: goal.name, goalData: goal}]
+        goals: [...planner.goals, {id: goal._id, name: goal.name, category: goal.category, goalData: goal}]
       })
       planner.steps.splice(2, 0, `activity-selection/${goal._id}`)
     }

@@ -12,6 +12,7 @@ const GET_GOALS = gql`
       name
       category
       supportTarget
+      tags
     }
   }
 `
