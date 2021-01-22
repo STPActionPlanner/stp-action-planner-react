@@ -40,7 +40,7 @@ const ActivitySelectionPage = ({location: {pathname}}) => {
         <GoalTitle>{currentGoal.name}</GoalTitle>
       </GoalOverviewSection>
       <ActivityListSection info={info}>
-        <ActivityList goalId={goalId} toggleInfo={toggleInfo} infoId={infoId} />
+        <ActivityList goal={currentGoal} toggleInfo={toggleInfo} infoId={infoId} />
       </ActivityListSection>
       <ActivityInfoSection info={info}>
         <ActivityInfo id={infoId} handleClose ={() => setInfo(false)} />
