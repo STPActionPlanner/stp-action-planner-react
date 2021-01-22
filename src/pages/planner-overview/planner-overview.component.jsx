@@ -21,32 +21,42 @@ const PlannerOverview = () => {
     setPlannerOverview(sortedGoals)
   }, [planner])
 
-
+  console.log(plannerOverview)
   return (
     <PageContainer>
-      {
-        plannerOverview.map(goal => (
-          <GoalList>
-            <GoalListItem>{goal.name}</GoalListItem>
-            <ActivityList>
-              {
-                goal.activities.map(activity => (
-                  <>
-                    <ActivityListItem>{activity.name}</ActivityListItem>
-                    {
-                      activity?.activityData.description ? (
-                        <ActivityDataList>
-                          <ActivityDataItem>{activity.activityData.description}</ActivityDataItem>
-                        </ActivityDataList>
-                      ) : null
-                    }
-                  </>
-                ))
-              }
-            </ActivityList>
-          </GoalList>
-        ))
-      }
+      <table style={{borderSpacing: "50px 0", borderCollapse: "separate", width: "100%"}}>
+        <thead style={{backgroundColor: "red"}}>
+          <th>Action / Initiative</th>
+          <th>Description</th>
+          <th>Person Responsible</th>
+          <th>Proposed Dates</th>
+          <th>Resource or Cost</th>
+          <th>Notes / Status</th>
+        </thead>
+        <tbody>
+          {
+            plannerOverview.map(goal => (
+              <>
+                <tr>
+                  <td style={{backgroundColor: "blue", textAlign: 'center', padding: "20px"}} colSpan="6">{goal.name}</td>
+                </tr>
+                {
+                  goal.activities.map(activity => (
+                    <tr>
+                      <td style={{paddingBottom: "30px"}}>{activity.name}</td>
+                      <td style={{maxWidth: "300px", paddingBottom: "30px"}}>{activity.activityData.description}</td>
+                      <td style={{paddingBottom: "30px"}}>TBD</td>
+                      <td style={{paddingBottom: "30px"}}>TBD</td>
+                      <td style={{paddingBottom: "30px"}}>TBD</td>
+                      <td style={{paddingBottom: "30px"}}>N/A</td>
+                    </tr>
+                    ))
+                  }
+              </>
+            ))
+          }
+        </tbody>
+      </table>
     </PageContainer>
   )
 }
