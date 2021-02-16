@@ -9,8 +9,6 @@ export const PageContainer = styled.div`
   align-items: flex-end;
   justify-content: center;
   
-  background-color: ${props => props.theme.colors.white};
-  
   @media only screen and (min-width: 48em) {
     padding: 1rem;
   }
@@ -29,52 +27,52 @@ export const HomeContainer = styled.main`
 `
 
 export const HomeContent = styled.div`
-  padding: 3rem;
-
-  background-color: #fff;
-  border-radius: 1rem;
-  box-shadow: ${props => props.theme.shadows.lrg};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 export const HeadingContainer = styled.div`
-  height: max-content;
-  width: max-content;
+  max-width: 40rem;
   margin-bottom: 3rem;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
 `
 
 export const HeadingTitle = styled.h1`
   margin: 0;
-  font-size: 5rem;
-  font-weight: 500;
+  font-size: 2.5rem;
+  font-weight: 600;
 `
 
-export const HeadingSubtitle = styled.h3`
-  font-size: 2rem;
+export const HeadingSubtitle = styled.p`
+  font-size: 1.6rem;
   font-weight: 400;
 `
 
 export const ActionsContainer = styled.div`
-  height: max-content;
-  width: max-content;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
 `
 
 export const Button = styled(Link)`
-  padding: 1rem 3rem;
+  padding: 2rem 4rem;
   
-  background-color: ${props => props.theme.colors.green};
-  border-radius: 1rem;
-  color: ${props => props.theme.colors.black};
+  background-color: ${props => props.clear ? 'transparent' : '#079398'};
+  border-radius: .5rem;
+  color: ${props => props.clear ? '#000' : '#fff'};
   font-size: 1.6rem;
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
   text-align: center;
+
+  &:active {
+    background-color: ${props => props.clear ? 'transparent' : '#007079'};
+  }
 `

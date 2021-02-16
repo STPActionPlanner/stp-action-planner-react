@@ -13,14 +13,14 @@ const HomePage = () => {
       <HomeContainer>
         <HomeContent>
           <HeadingContainer>
-            <HeadingTitle>Welcome,</HeadingTitle>
+            <HeadingTitle>Welcome to STSWR's School Travel Planning Action Planner.</HeadingTitle>
             <HeadingSubtitle>Select an option below to start</HeadingSubtitle>
           </HeadingContainer>
           <ActionsContainer>
-            <CustomButton to={`/${steps[1]}`} onClick={clearPlanner}>Start a new action plan</CustomButton>
+            <Button to={`/${steps[1]}`} onClick={clearPlanner}>Start a new action plan</Button>
             {
               step !== steps[0] ? (
-                <CustomButton to={`/${step}`}>Resume previous action plan</CustomButton>
+                <Button to={`/${step}`} clear>Resume previous action plan</Button>
               ) : null
             }
           </ActionsContainer>

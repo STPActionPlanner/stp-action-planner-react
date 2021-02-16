@@ -19,7 +19,7 @@ export const CustomButtonContainer = styled.button`
     ? "2.2rem"
     : "1.6rem"
   };
-  border-radius: 1rem;
+  border-radius: .5rem;
   border: none;
 `
 
@@ -42,7 +42,7 @@ export const CustomLinkContainer = styled(Link)`
     ? "2.2rem"
     : "1.6rem"
   };
-  border-radius: 1rem;
+  border-radius: .5rem;
   border: none;
   text-decoration: none;
   text-align: center;
