@@ -15,6 +15,10 @@ const GET_ACTIVITIES = gql`
       description
       supportTarget
       # tags
+      process {
+        title
+        additionalInfo
+      }
     }
   }
 ` 
