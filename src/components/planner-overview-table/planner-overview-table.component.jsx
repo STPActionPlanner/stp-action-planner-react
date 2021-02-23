@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import ExportPlanner from '../export-planner/export-planner.component'
 
@@ -20,25 +20,27 @@ const PlannerOverviewTable = ({plannerOverview}) => {
     <ExportPlanner plannerOverview={plannerOverview} table={document.getElementsByTagName("table")} />
     <Table>
         <TableHeadingContainer>
-          <TableHeadingItem data-export-style="heading" export={true} sm>Action / Initiative</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={true} md>Description</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={true} lg>Process</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={false}>Person Responsible</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={false}>Proposed Dates</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={false}>Resource or Cost</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={false}>Notes / Status</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={false}>Standard Operating Procedures PDF</TableHeadingItem>
+          <tr data-export-style="heading-row">
+            <TableHeadingItem data-export-style="heading" export={true} sm>Action / Initiative</TableHeadingItem>
+            <TableHeadingItem data-export-style="heading" export={true} md>Description</TableHeadingItem>
+            <TableHeadingItem data-export-style="heading" export={true} lg>Process</TableHeadingItem>
+            <TableHeadingItem data-export-style="heading" export={false}>Person Responsible</TableHeadingItem>
+            <TableHeadingItem data-export-style="heading" export={false}>Proposed Dates</TableHeadingItem>
+            <TableHeadingItem data-export-style="heading" export={false}>Resource or Cost</TableHeadingItem>
+            <TableHeadingItem data-export-style="heading" export={false}>Notes / Status</TableHeadingItem>
+            <TableHeadingItem data-export-style="heading" export={false}>Standard Operating Procedures PDF</TableHeadingItem>
+          </tr>
         </TableHeadingContainer>
         <TableBody>
           {
             plannerOverview.map(goal => (
-              <>
+              <React.Fragment key={goal.name}>
                 <TableRowHeading>
                   <TableDataRowHeading data-export-style="goal-section-heading" sm>{goal.name}</TableDataRowHeading>
                 </TableRowHeading>
                 {
                   goal.activities.map(activity => (
-                    <TableRowGeneral>
+                    <TableRowGeneral key={activity.name}>
                       <TableDataGeneral data-export-style="goal-row-data" export={true} sm>{activity.name}</TableDataGeneral>
                       <TableDataDescription data-export-style="goal-row-data-description" md>{activity.activityData.description ? activity.activityData.description : <p>No description available.</p>}</TableDataDescription>
                       <TableDataGeneral data-export-style="goal-row-process" export={true} lg>
@@ -47,7 +49,7 @@ const PlannerOverviewTable = ({plannerOverview}) => {
                         activity.activityData.process ? (
                           activity.activityData.process.map(process => {
                             return (
-                              <>
+                              <React.Fragment key={process.title}>
                                 <li>{process.title}</li>
                                   {
                                     process.additionalInfo ? (
@@ -60,7 +62,7 @@ const PlannerOverviewTable = ({plannerOverview}) => {
                                       </ul>
                                     ) : null
                                   }
-                              </>
+                              </React.Fragment>
                             )
                           })
                           ) : <p>No Process defined.</p>
@@ -75,7 +77,7 @@ const PlannerOverviewTable = ({plannerOverview}) => {
                     </TableRowGeneral>
                     ))
                   }
-              </>
+              </React.Fragment>
             ))
           }
         </TableBody>

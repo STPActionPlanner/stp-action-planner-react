@@ -22,10 +22,14 @@ export const downloadTable = (table, filename) => {
       
       for (let d = 0; d < rowChildren.length; d++) { // loop through rows in the section.
         const rowData = rowChildren[d]
+        console.log(rowData)
 
-        if (rowData.dataset.exportStyle === 'heading') { // Get table headings.
-          heading += `<th bgcolor="#7478F5" valign="middle"><font size="3" face="arial" color="#ffffff">${rowData.innerHTML}</font></th>`
-
+        if (rowData.dataset.exportStyle === 'heading-row') { // enter table heading row.
+          console.log('heading row', rowData.childNodes)
+          const colHeadings = rowData.childNodes;
+          for (let ch = 0; ch < colHeadings.length; ch++) { // loop through column headings.
+            heading += `<th bgcolor="#7478F5" valign="middle"><font size="3" face="arial" color="#ffffff">${colHeadings[ch].innerHTML}</font></th>`
+          }
         } else {
           const rowChildren = rowData.childNodes
           body += '<tr height="300">'

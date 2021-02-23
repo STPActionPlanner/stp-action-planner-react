@@ -125,21 +125,21 @@ const ExportPlanner = ({plannerOverview, table}) => {
       <EPContainer onSubmit={handleSubmit}>
         <EPAllInputs>
           <EPInputGroup>
-            <EPInputLabel for="name">
+            <EPInputLabel htmlFor="name">
                 Name *
             </EPInputLabel>
             <EPInput name="name" onChange={handleChange} value={userInfo.name} minLength="1" />
             <EPErrorMessage>{errors.name ? 'Enter your name.' : ''}</EPErrorMessage>
           </EPInputGroup>
           <EPInputGroup>
-            <EPInputLabel for="school">
+            <EPInputLabel htmlFor="school">
                 School *
             </EPInputLabel>
             <EPInput name="school" onChange={handleChange} value={userInfo.school} minLength="1" />
             <EPErrorMessage>{ errors.school ? 'Enter the name of your school.' : ''}</EPErrorMessage>
           </EPInputGroup>
           <EPInputGroup>
-            <EPInputLabel for="email">
+            <EPInputLabel htmlFor="email">
                 Email *
             </EPInputLabel>
             <EPInputEmail name="email" onChange={handleChange} value={userInfo.email} />

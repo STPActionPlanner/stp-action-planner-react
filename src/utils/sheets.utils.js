@@ -5,8 +5,7 @@ export const appendSpreadsheet = async (row) => {
   const doc = new GoogleSpreadsheet('1wmCfd5wgrmfgmAmOzK5A-D_lNnHAHW4TeHizga_49Go');
   
   // Initialize Auth - see more available options at https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication
-  console.log(process.env.REACT_APP_CLIENT_EMAIL, process.env.REACT_APP_PRIVATE_KEY)
-  
+  console.log(process.env.REACT_APP_PRIVATE_KEY, process.env.REACT_APP_CLIENT_EMAIL)
   await doc.useServiceAccountAuth({
     client_email: process.env.REACT_APP_CLIENT_EMAIL,
     private_key: process.env.REACT_APP_PRIVATE_KEY,

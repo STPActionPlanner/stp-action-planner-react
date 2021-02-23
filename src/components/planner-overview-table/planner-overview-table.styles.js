@@ -15,6 +15,7 @@ export const TableHeadingItem = styled.th`
   padding: 1rem 2rem;
   font-size: 1.6rem;
   color: ${props => props.theme.colors.white};
+  text-align: center;
 
   @media only screen and (min-width: 40em) {
     display: ${props => props.sm || props.md ? "table-cell" : "none"};
