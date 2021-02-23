@@ -8,7 +8,7 @@ export const appendSpreadsheet = async (row) => {
   console.log(process.env.REACT_APP_PRIVATE_KEY, process.env.REACT_APP_CLIENT_EMAIL)
   await doc.useServiceAccountAuth({
     client_email: process.env.REACT_APP_CLIENT_EMAIL,
-    private_key: process.env.REACT_APP_PRIVATE_KEY,
+    private_key: process.env.REACT_APP_PRIVATE_KEY.split("\\n").join("\n"),
   });
   
   await doc.loadInfo(); // loads document properties and worksheets
