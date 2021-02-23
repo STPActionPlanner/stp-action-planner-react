@@ -15,8 +15,6 @@ import {
 } from './planner-overview-table.styles';
 
 const PlannerOverviewTable = ({plannerOverview}) => {
-  const [isExporting, setExporting] = useState(false)
-
   return (
     <>
     <ExportPlanner plannerOverview={plannerOverview} table={document.getElementsByTagName("table")} />
@@ -25,11 +23,11 @@ const PlannerOverviewTable = ({plannerOverview}) => {
           <TableHeadingItem data-export-style="heading" export={true} sm>Action / Initiative</TableHeadingItem>
           <TableHeadingItem data-export-style="heading" export={true} md>Description</TableHeadingItem>
           <TableHeadingItem data-export-style="heading" export={true} lg>Process</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={isExporting}>Person Responsible</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={isExporting}>Proposed Dates</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={isExporting}>Resource or Cost</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={isExporting}>Notes / Status</TableHeadingItem>
-          <TableHeadingItem data-export-style="heading" export={isExporting}>Standard Operating Procedures PDF</TableHeadingItem>
+          <TableHeadingItem data-export-style="heading" export={false}>Person Responsible</TableHeadingItem>
+          <TableHeadingItem data-export-style="heading" export={false}>Proposed Dates</TableHeadingItem>
+          <TableHeadingItem data-export-style="heading" export={false}>Resource or Cost</TableHeadingItem>
+          <TableHeadingItem data-export-style="heading" export={false}>Notes / Status</TableHeadingItem>
+          <TableHeadingItem data-export-style="heading" export={false}>Standard Operating Procedures PDF</TableHeadingItem>
         </TableHeadingContainer>
         <TableBody>
           {
@@ -69,11 +67,11 @@ const PlannerOverviewTable = ({plannerOverview}) => {
                         }
                         </ol>
                       </TableDataGeneral>
-                      <TableDataGeneral data-export-style="goal-row-data" export={isExporting}>TBD</TableDataGeneral>
-                      <TableDataGeneral data-export-style="goal-row-data" export={isExporting}>TBD</TableDataGeneral>
-                      <TableDataGeneral data-export-style="goal-row-data" export={isExporting}>TBD</TableDataGeneral>
-                      <TableDataGeneral data-export-style="goal-row-data" export={isExporting}>N/A</TableDataGeneral>
-                      <TableDataGeneral data-export-style="goal-row-data" export={isExporting}>{activity.activityData.SOP}</TableDataGeneral>
+                      <TableDataGeneral data-export-style="goal-row-data" export={false}>TBD</TableDataGeneral>
+                      <TableDataGeneral data-export-style="goal-row-data" export={false}>TBD</TableDataGeneral>
+                      <TableDataGeneral data-export-style="goal-row-data" export={false}>TBD</TableDataGeneral>
+                      <TableDataGeneral data-export-style="goal-row-data" export={false}>N/A</TableDataGeneral>
+                      <TableDataGeneral data-export-style="goal-row-data" export={false}>{activity.activityData.SOP}</TableDataGeneral>
                     </TableRowGeneral>
                     ))
                   }

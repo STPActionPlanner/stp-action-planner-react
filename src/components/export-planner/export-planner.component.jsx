@@ -33,38 +33,40 @@ const ExportPlanner = ({plannerOverview, table}) => {
   })
   const [completed, setCompleted] = useState(false)
 
+  
+  
   // Use the return value of validateForm to enable/disable download planner button.
   useEffect(()=> {
     if (firstRender.current) {
       firstRender.current = false
       return
     }
-    setDisabled(validateForm())
+    setDisabled(
+      // A form validation function to check that all inputs are not empty and email is the correct format.
+      () => {
+        const {name, email, school} = userInfo
+        if (name === '') {
+          setErrors(e => ({...e, name: true}))
+          return true
+        }
+        
+        if (school === '') {
+          setErrors(e => ({...e, school: true}))
+          return true
+        }
+        
+        const regex = new RegExp('.+@.+..+')
+        if (!regex.test(email)) {
+          setErrors(e => ({...e, email: true}))
+          return true
+        }
+        
+        setErrors({name: false, school: false, email: false})
+        return false
+      }
+    )
   },[userInfo])
-
-  // A form validation function to check that all inputs are not empty and email is the correct format.
-  const validateForm = () => {
-    const {name, email, school} = userInfo
-    if (name === '') {
-      setErrors({...errors, name: true})
-      return true
-    }
-
-    if (school === '') {
-      setErrors({...errors, school: true})
-      return true
-    }
-
-    const regex = new RegExp('.+\@.+\..+')
-    if (!regex.test(email)) {
-      setErrors({...errors, email: true})
-      return true
-    }
-
-    setErrors({name: false, school: false, email: false})
-    return false
-  }
-
+  
   const handleChange = (e) => {
     const {name, value } = e.target
     setUserInfo({...userInfo, [name]: value})

@@ -16,4 +16,5 @@ export const appendSpreadsheet = async (row) => {
   
   const sheet = doc.sheetsByTitle['Responses']; // or use doc.sheetsByIndex[0];  doc.sheetsById[id] or doc.sheetsByTitle[title]
   const result = await sheet.addRow(row);
+  return result;
 }

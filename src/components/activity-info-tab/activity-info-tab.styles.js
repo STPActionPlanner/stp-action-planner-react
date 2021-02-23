@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AiFillCaretRight, AiOutlineRotateLeft } from "react-icons/ai";
+import { AiFillCaretRight } from "react-icons/ai";
 
 export const Tab = styled.div`
   height: auto;
