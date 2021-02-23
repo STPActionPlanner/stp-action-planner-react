@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 
 export const NavStepActions = styled.div`
-  width: max-content;
   height: max-content;
-
+  width: max-content;
   display: flex;
   gap: 2rem;
 `  

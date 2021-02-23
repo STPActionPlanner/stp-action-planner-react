@@ -1,16 +1,22 @@
 import styled from 'styled-components';
 
 export const EPContainer = styled.form`
-  height: auto;
   width: 100%;
-  padding: 3rem;
-
+  padding: 3rem 1rem 5rem 1rem;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+  background-color: ${props => props.theme.colors.lightBlue};
+`
 
-  background-color: grey;
+export const EPAllInputs = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5rem;
 `
 
 export const EPInputGroup = styled.div`
@@ -19,6 +25,7 @@ export const EPInputGroup = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   gap: 1rem;
+  position: relative;
 `
 
 export const EPInputLabel = styled.label`
@@ -41,15 +48,22 @@ export const EPInputEmail = styled(EPInput).attrs(props => ({
 `
 
 export const EPErrorMessage = styled.p`
+  position: absolute;
+  bottom: -4rem;
+  left: 0;
   color: red;
   font-size: 1.6rem;
 `
 
-export const EPButton = styled.button`
-  padding: 1rem 2rem;
-  background-color: green;
-  font-size: 1.6rem;
-  text-transform: uppercase;
-  border: none;
-  color: #000;
+export const EPActionContainer = styled.div`
+  height: 100%;
+  width: auto;
+  background-color: red;
+`
+
+export const EPFinalizedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 2rem;
 `

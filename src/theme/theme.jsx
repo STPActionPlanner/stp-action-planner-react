@@ -1,16 +1,19 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 
-const theme = {
+export const theme = {
   colors: {
-    blue: "#049DBF",
-    green: "#8FC73E",
-    orange: "#BF4904",
-    burntOrange: "#A62F03",
-    white: "#F2F2F2",
-    darkGrey: "#4B4B4B",
-    black: "#000",
-    red: "#ff0000"
+    blue: "#54C1FB",
+    lightBlue: "#EDF8FE",
+    purple: "#6D71F8",
+    lightPurple: "#E4E4F6",
+    red: "#F1798E",
+    xlightGrey: "#F6F6F8",
+    lightGrey: "#E4E5EF",
+    medGrey: "#A6A6BB",
+    darkGrey: "#65667F",
+    black: "#272848",
+    white: "#ffffff"
   },
   shadows: {
     med: ".5rem .5rem .5rem 0 rgba(0,0,0, .15)",

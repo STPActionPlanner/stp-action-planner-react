@@ -1,29 +1,41 @@
 import React, {useContext, useState} from 'react'
 import { withRouter } from 'react-router-dom'
-import {PlannerContext} from '../../contexts/plannerContext'
+import { PlannerContext } from '../../contexts/plannerContext'
 
 import NavbarDropdownItem from '../navbar-dropdown-item/navbar-dropdown-item.component'
 import NavbarStepActions from '../navbar-step-actions/navbar-step-actions.components'
 
-import {Nav, NavContainer, Logo, NavLink, NavList, NavItem, NavItemDropdown} from './navbar.styles'
+import {
+  DropdownClose, 
+  DropdownContent,
+  DropdownHeader,
+  Logo,
+  Nav,
+  NavContainer,
+  NavItem, 
+  NavItemDropdown, 
+  NavLink,
+  NavList,
+} from './navbar.styles'
+
+const initialDropdownState = {goal: false, activity: false};
 
 const Navbar = ({history}) => {
-  const initialDropdownState = {goal: false, activity: false};
-  const [showDropdown, setShowDropdown] = useState(initialDropdownState);
+  // Pull methods and data from planner context.
   const { planner, nextStep, prevStep, removeActivity, removeGoal} = useContext(PlannerContext)
+  const [showDropdown, setShowDropdown] = useState(initialDropdownState);
 
   const toggleDropdown = (dropdown) => {
     setShowDropdown({...initialDropdownState, [dropdown]: !showDropdown[dropdown]})
   }
 
+  // Define what url the navigation buttons direct to.
   const handleNav = async (direction) => {
     if (direction === 'next') {
       const newStep = nextStep(planner.step)
-      console.log(newStep)
       history.replace(`/${newStep}`)
     } else if (direction === 'prev') {
       const newStep = prevStep(planner.step)
-      console.log(newStep)
       history.replace(`/${newStep}`)
     }
   }
@@ -38,15 +50,23 @@ const Navbar = ({history}) => {
           <NavItem onClick={() => toggleDropdown('goal')}>
             <span>Goals ({planner.goals.length})</span>
             {
-              showDropdown.goal && planner.goals.length ? (
+              showDropdown.goal ? (
                 <NavItemDropdown>
-                  {
-                    planner.goals
-                      .sort((a,b) => a.name.localeCompare(b.name))
-                      .map(goal => (
-                        <NavbarDropdownItem label={goal.name} handleClick={() => removeGoal(goal.id)} />
-                    ))
-                  }
+                  <DropdownHeader>
+                    <span>Selected Goals</span>
+                    <DropdownClose onClick={() => toggleDropdown('goal')}>&#x02A2F;</DropdownClose>
+                  </DropdownHeader>
+                  <DropdownContent>
+                    {
+                      planner.goals.length ? (
+                        planner.goals
+                          .sort((a,b) => a.name.localeCompare(b.name))
+                          .map(goal => (
+                            <NavbarDropdownItem label={goal.name} handleClick={() => removeGoal(goal.id)} />
+                        ))
+                      ) : ('No goals selected')
+                    }
+                  </DropdownContent>
                 </NavItemDropdown>
               ) : null
             }
@@ -54,15 +74,23 @@ const Navbar = ({history}) => {
           <NavItem onClick={() => toggleDropdown('activity')}>
             <span>Activities ({planner.activities.length})</span>
             {
-              showDropdown.activity && planner.activities.length ? (
+              showDropdown.activity ? (
                 <NavItemDropdown>
-                  {
-                    planner.activities
-                      .sort((a,b) => a.name.localeCompare(b.name))
-                      .map(activity => (
-                        <NavbarDropdownItem label={activity.name} handleClick={() => removeActivity(activity.id)} />
-                      ))
-                  }
+                  <DropdownHeader>
+                    <span>Selected Activities</span>
+                    <DropdownClose onClick={() => toggleDropdown('activity')}>&#x02A2F;</DropdownClose>
+                  </DropdownHeader>
+                  <DropdownContent>
+                    {
+                      planner.activities.length ? (
+                        planner.activities
+                          .sort((a,b) => a.name.localeCompare(b.name))
+                          .map(activity => (
+                            <NavbarDropdownItem label={activity.name} handleClick={() => removeActivity(activity.id)} />
+                          ))
+                      ) : ('No activities selected')
+                    }
+                  </DropdownContent>
                 </NavItemDropdown>
               ) : null
             }

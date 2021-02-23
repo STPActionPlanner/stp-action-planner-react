@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 
-import { Tab, TabToggle, TabHeader, TabBody, TabTitle, TabOrderedList, TabUnorderedList, TabListItem, TabParagraph, TabLink, TabButton } from './activity-info-tab.styles';
+import {
+  Tab,
+  TabBody,
+  TabHeader,
+  TabLink,
+  TabListItem,
+  TabOrderedList,
+  TabParagraph,
+  TabTitle,
+  TabToggle,
+  TabUnorderedList,
+} from './activity-info-tab.styles';
 
 const ActivityInfoTab = ({data, title}) => {
   const [isToggled, setToggled] = useState(false)

@@ -1,18 +1,11 @@
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`
-  height: calc(100vh - 8rem);
   width: 100%;
-
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  
   background-color: ${props => props.theme.colors.white};
-  
-  @media only screen and (min-width: 48em) {
-    padding: 1rem;
-  }
 `
 
 export const GoalSelectionContainer = styled.main`
@@ -20,18 +13,55 @@ export const GoalSelectionContainer = styled.main`
   width: 100%;
   max-width: 144rem;
   padding: 1rem;
-  
 
   @media only screen and (min-width: 48em) {
     border-radius: 1rem;
   }
 `
 
-export const CardListContainer = styled.div`
+export const GoalSelectionTitleContainer = styled.div`
   width: 100%;
-  height: 100%;
-  padding-right: 1rem;
+  padding-bottom: 2rem;
+  text-align: center;
 
-  overflow-y: scroll;
-  overflow-x: visible;
+  @media only screen and (min-width: 40em) {
+    text-align: left;
+  }
+`
+
+export const GoalSelectionTitle = styled.h1`
+  font-size: 3rem;
+`
+
+export const GoalSelectionSubtitle = styled.p`
+  font-size: 1.8rem;
+`
+
+export const GoalSelectionHeader = styled.div`
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid ${props => props.theme.colors.lightGrey};
+  border-bottom: 1px solid ${props => props.theme.colors.lightGrey};
+  background-color: ${props => props.theme.colors.lightBlue};
+
+  @media only screen and (min-width: 40em) {
+    justify-content: space-between;
+  }
+`
+
+export const HeaderTitle = styled.p`
+  font-size: 1.6rem;
+  color: ${props => props.theme.colors.darkGrey};
+  display: ${props => !props.sm ? "none" : "block"};
+
+  @media only screen and (min-width: 40em) {
+    display: ${props => props.sm ? "none" : "block"};
+  }
+`
+
+export const CardListContainer = styled.div`
+  height: 100%;
+  width: 100%;
 `

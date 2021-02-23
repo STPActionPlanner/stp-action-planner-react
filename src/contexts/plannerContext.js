@@ -2,7 +2,7 @@ import React, {useEffect, useState, createContext} from 'react'
 
 export const PlannerContext = createContext();
 
-const initialState = {step: '', steps: ['','goal-selection', 'plan-overview', 'plan-share'], activities: [], goals: []}
+const initialState = {step: '', steps: ['','goal-selection', 'plan-overview'], activities: [], goals: []}
 
 const PlannerContextProvider = ({children}) => {
   const [planner, setPlanner] = useState(initialState);
@@ -22,13 +22,14 @@ const PlannerContextProvider = ({children}) => {
 
   // Planner utility functions.
   const clearPlanner = () => {
-    setPlanner({ ...initialState, step: initialState.steps[1]});
+    setPlanner({ ...initialState, steps: initialState.steps, step: initialState.steps[1]});
   }
 
   const updatePlannerStep = (step) => {
     setPlanner({...planner, step})
   }
 
+  // Define next step in the planning process when given current step.
   const nextStep = (currentStep) => {
     const stepIndex = planner.steps.indexOf(currentStep)
     if (stepIndex + 1 < planner.steps.length) {
@@ -39,6 +40,7 @@ const PlannerContextProvider = ({children}) => {
     return currentStep;
   }
 
+  // Define prev step in the planning process when given current step.
   const prevStep = (currentStep) => {
     const stepIndex = planner.steps.indexOf(currentStep)
     if (stepIndex - 1 >= 0) {
@@ -49,6 +51,7 @@ const PlannerContextProvider = ({children}) => {
     return currentStep
   }
 
+  // Add a goal to the planner.
   const addGoal = (goal) => {
     if (!planner.goals.some(goal => goal.id === goal._id)) {
       setPlanner({
@@ -59,6 +62,7 @@ const PlannerContextProvider = ({children}) => {
     }
   }
 
+  // Add an activity to the planner.
   const addActivity = (activity, goalId) => {
     if (!planner.activities.some(activity => activity.id === activity._id)) {
       const { name } = planner.goals.find(goal => goal.id === goalId)
@@ -80,6 +84,7 @@ const PlannerContextProvider = ({children}) => {
     }
   }
 
+  // Remove an activity from the planner.
   const removeActivity = (activityId) => {
     setPlanner({
       ...planner,
@@ -87,6 +92,7 @@ const PlannerContextProvider = ({children}) => {
     })
   }
 
+  // Remove a goal from the planner.
   const removeGoal = (goalId) => {
     setPlanner({
       ...planner, 
@@ -96,6 +102,7 @@ const PlannerContextProvider = ({children}) => {
     })
   }
 
+  // Define the context provider and associated data and methods that are included.
   return (
     <PlannerContext.Provider value={{planner, clearPlanner, updatePlannerStep, nextStep, prevStep, addGoal, removeGoal, addActivity, removeActivity}}>
       {children}

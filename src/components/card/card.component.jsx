@@ -1,67 +1,80 @@
 import React from 'react'
+import CustomButton from '../custom-button/custom-button.component';
+import { theme } from '../../theme/theme'
+
 
 import {
   CardActionsContainer,
-  CardButton,
+  CardContainer,
   CardDescription,
   CardDetailsContainer,
-  CardContainer,
   CardTag,
   CardTagContainer,
   CardTitle,
-  TagTitle
+  CardTitleContainer,
+  TagTitle,
 } from './card.styles';
 
 const Card = ({
-  title,
   description,
-  tags,
-  primaryBtnTitle,
   handlePrimaryClick,
+  handleSecondaryClick,
+  primaryBtnState,
+  primaryBtnTitle,
+  secondaryBtnState,
   secondaryBtnTitle,
-  handleSecondaryClick
+  tags,
+  title,
+  variant,
 }) => {
   return (
     <CardContainer>
       <CardDetailsContainer>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-        <CardTagContainer>
-          {
-            tags ? (
-              tags.map(tag => (
-                <CardTag key={tag}>
-                  <TagTitle>{tag}</TagTitle>
-                </CardTag>
-              ))
-            ) : null
-          }
-        </CardTagContainer>
-      </CardDetailsContainer>
-      <CardActionsContainer>
+        <CardTitleContainer>
+          <CardTitle>
+            {title}
+          </CardTitle>
+          <CardTagContainer>
+            {
+              tags ? (
+                tags.map(tag => (
+                  <CardTag key={tag}>
+                    <TagTitle>{tag}</TagTitle>
+                  </CardTag>
+                ))
+                ) : null
+              }
+          </CardTagContainer>
+        </CardTitleContainer>
         {
-          primaryBtnTitle ? (
-            <CardButton 
-              onClick={
-                handlePrimaryClick 
-                ? handlePrimaryClick 
-                : () => console.log("primary click handler not setup"
-                )}
-            >
-              {primaryBtnTitle}
-            </CardButton>
+          description ? (
+            <CardDescription>{description}</CardDescription>
           ) : null
         }
+      </CardDetailsContainer>
+      <CardActionsContainer>
+        <CustomButton 
+          toggled={primaryBtnState}
+          onClick={handlePrimaryClick}
+          primaryBgColor={theme.colors.lightPurple}
+          primaryColor={theme.colors.purple}
+          secondaryBgColor={theme.colors.xlightGrey}
+          secondaryColor={theme.colors.red}
+        >
+          {primaryBtnTitle}
+        </CustomButton>
         {
-          secondaryBtnTitle ? (
-            <CardButton 
-              onClick={
-                handleSecondaryClick
-                ? handleSecondaryClick 
-                : () => console.log("secondary click handler not setup.")
-              }>
-                {secondaryBtnTitle}
-              </CardButton>
+          variant === 'activity' ? (
+            <CustomButton
+              toggled={secondaryBtnState}
+              onClick={handleSecondaryClick}
+              primaryBgColor={theme.colors.lightBlue}
+              primaryColor={theme.colors.blue}
+              secondaryBgColor={theme.colors.xlightGrey}
+              secondaryColor={theme.colors.red}
+            >
+              {secondaryBtnTitle}
+            </CustomButton>
           ) : null
         }
       </CardActionsContainer>

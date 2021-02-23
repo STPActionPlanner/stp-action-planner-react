@@ -1,4 +1,16 @@
-export const downloadTable = (table) => {
+const download = (name, file) => {
+  let element = document.createElement('a')
+  element.setAttribute('href', file)
+  element.setAttribute('download', name)
+
+  element.style.display = 'none'
+  document.body.appendChild(element)
+  element.click()
+  document.body.removeChild(element)
+}
+
+
+export const downloadTable = (table, filename) => {
   let heading = '<thead>'
   let body = '</tbody>'
   // access table.
@@ -12,7 +24,7 @@ export const downloadTable = (table) => {
         const rowData = rowChildren[d]
 
         if (rowData.dataset.exportStyle === 'heading') { // Get table headings.
-          heading += `<th bgcolor="#62af23">${rowData.innerHTML}</th>`
+          heading += `<th bgcolor="#7478F5" valign="middle"><font size="3" face="arial" color="#ffffff">${rowData.innerHTML}</font></th>`
 
         } else {
           const rowChildren = rowData.childNodes
@@ -21,14 +33,31 @@ export const downloadTable = (table) => {
           for (let td = 0; td < rowChildren.length; td++) { // Loop through the TDs in the row.
 
             if (rowChildren[td].dataset.exportStyle === 'goal-section-heading') { // Goal Section Header TD
-              body += `<td colspan="7" align="center" bgcolor="#8bf3a5"><font size="4">${rowChildren[td].innerHTML}</font></td>`
+              body += `<td colspan="8" align="center" valign="middle" bgcolor="#E4E4F6"><font size="5" face="arial" color="#7478F5">${rowChildren[td].innerHTML}</font></td>`
 
             } else if (rowChildren[td].dataset.exportStyle === 'goal-row-data') { // General TDs
-              body += `<td valign="middle" width="150" height="50">${rowChildren[td].innerHTML}</td>`
+              body += `<td valign="middle" width="150"><font face="arial" size="2">${rowChildren[td].innerHTML}</font></td>`
 
             } else if (rowChildren[td].dataset.exportStyle === 'goal-row-data-description') { // description TD
-              body += `<td width="300">${rowChildren[td].innerHTML}</td>`
-            }
+              body += `<td valign="middle" width="600" white-space:wrap; ><font face="arial" size="2">${rowChildren[td].innerHTML}</font></td>`
+            } else if (rowChildren[td].dataset.exportStyle === 'goal-row-process') { // process TD
+              let processList = [];
+              const ol = rowChildren[td].childNodes[0].childNodes
+              let stepCount = 0;
+              ol.forEach(el => {
+                if (el.nodeName === 'UL') {
+                  el.childNodes.forEach(ulEl => {
+                    processList.push(`|--- ${ulEl.innerHTML}`)
+                  })
+                } else {
+                  processList.push(`<br style="mso-data-placement:same-cell;" />`)
+                  processList.push(`${stepCount += 1}. ${el.innerHTML}`)
+                }
+              })
+              body += `<td width="500"><font face="arial" size="2">
+                ${processList.join('<br style="mso-data-placement:same-cell;" />')}
+              </font></td>`
+            } 
           }
           body += '</tr>'
         }
@@ -37,7 +66,7 @@ export const downloadTable = (table) => {
     const headingFinal = heading + '</thead>'
     const bodyFinal = body + '</tbody>'
     const tableFinal = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><table table-layout="auto">' + headingFinal + bodyFinal + '</table></html>';
-    const output = window.open('data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,' + encodeURIComponent(tableFinal))
-    return output
+    const output = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,' + encodeURIComponent(tableFinal)
+    download(filename, output)
   }
 }

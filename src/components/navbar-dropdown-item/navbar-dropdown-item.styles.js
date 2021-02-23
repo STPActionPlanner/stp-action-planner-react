@@ -4,15 +4,11 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 export const NavItem = styled.li`
   padding: .5rem 1rem;
-  font-size: 1.6rem;
-
   display: flex;
   align-items: center;
-
   position: relative;
-
+  font-size: 1.6rem;
   border-radius: 2rem;
-
   transition: .2s all;
 
   &:hover {
@@ -22,12 +18,12 @@ export const NavItem = styled.li`
 `
 
 export const CloseIcon = styled(AiOutlineCloseCircle)`
-  width: auto;
   height: 2rem;
+  width: auto;
   margin-left: 1rem;
   fill: ${props => props.theme.colors.red};
-
   opacity: 0;
+  cursor: pointer;
   transition: .2s all;
 
   ${NavItem}:hover & {

@@ -4,8 +4,7 @@ import { CustomButtonContainer, CustomLinkContainer } from './custom-button.styl
 
 const CustomButton = ({
   big,
-  iconAfter,
-  iconBefore,
+  disabled,
   toggled,
   children,
   primaryBgColor,
@@ -17,18 +16,33 @@ const CustomButton = ({
 }) => {
   if (to) {
     return (
-      <CustomLinkContainer to={to} onClick={onClick} toggled={!toggled} big={big}>
-        {/* {iconBefore ? <Icon iconBefore={iconBefore} /> : null} */}
+      <CustomLinkContainer 
+        to={to}
+        onClick={onClick}
+        toggled={!toggled}
+        big={big}
+        primaryColor={primaryColor}
+        primaryBgColor={primaryBgColor}
+        secondaryBgColor={secondaryBgColor}
+        secondaryColor={secondaryColor}
+        disabled={disabled}
+      >
         {children}
-        {/* {iconAfter ? <Icon iconAfter={iconAfter} /> : null} */}
       </CustomLinkContainer>
     )
   } else {
     return (
-      <CustomButtonContainer onClick={onClick} toggled={!toggled} big={big}>
-        {/* {iconBefore ? <Icon iconBefore={iconBefore} /> : null} */}
+      <CustomButtonContainer
+        onClick={onClick}
+        toggled={!toggled}
+        big={big}
+        primaryColor={primaryColor}
+        primaryBgColor={primaryBgColor}
+        secondaryBgColor={secondaryBgColor}
+        secondaryColor={secondaryColor}
+        disabled={disabled}
+      >
         {children}
-        {/* {iconAfter ? <Icon iconAfter={iconAfter} /> : null} */}
       </CustomButtonContainer>
     )
   }

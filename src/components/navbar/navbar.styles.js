@@ -4,21 +4,24 @@ import { Link } from 'react-router-dom'
 import {ReactComponent as LogoIcon } from '../../assets/img/walk.svg'
 
 export const NavContainer = styled.nav`
-  height: max-content;
   width: 100%;
-  padding: 2rem;
-  
-  display: flex;
-  justify-content: center;
+  padding: 2rem 1rem;
 `
 
 export const Nav = styled.div`
   width: 100%;
   max-width: 144rem;
-
-  display: flex;
+  margin: 0 auto;
+  display: flex; 
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+
+  @media only screen and (min-width: 40em) {
+    flex-direction: row;
+    gap: 4rem;
+  }
 `
 
 export const Logo = styled(LogoIcon)`
@@ -27,12 +30,18 @@ export const Logo = styled(LogoIcon)`
 `
 
 export const NavList = styled.ul`
+  
   display: flex;
   gap: 2rem;
-
   position: relative;
 
   list-style: none;
+  order: 1;
+
+  @media only screen and (min-width: 40em) {
+    order: 0;
+    margin-right: auto;
+  }
 `
 
 export const NavItem = styled.li`
@@ -48,7 +57,6 @@ export const NavLink = styled(Link)`
 export const NavItemDropdown = styled.ul`
   height: max-content;
   width: max-content;
-  padding: 1rem;
 
   position: absolute;
   top: 100%;
@@ -61,6 +69,33 @@ export const NavItemDropdown = styled.ul`
   gap: 1rem;
 
   background-color: #fff;
-  border: 1px solid ${props => props.theme.colors.blue};
+  border: 1px solid ${props => props.theme.colors.lightPurple};
   border-radius: 1rem;
+`
+
+export const DropdownClose = styled.button`
+  border: none;
+  background-color: transparent;
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 2.5rem;
+  color: ${props => props.theme.colors.purple};;
+  line-height: 1;
+`
+
+export const DropdownHeader = styled.div`
+  width: 100%;
+  height: auto;
+  background-color: ${props => props.theme.colors.lightPurple};
+  border-radius: 1rem 1rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  padding: .5rem 1rem;
+  color: ${props => props.theme.colors.purple};
+`
+
+export const DropdownContent = styled.div`
+  padding: 0 1rem 1rem 1rem;
 `

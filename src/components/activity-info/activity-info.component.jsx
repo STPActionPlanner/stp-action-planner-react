@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { gql, useLazyQuery } from '@apollo/client';
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 import ActivityInfoTab from '../activity-info-tab/activity-info-tab.component';
+import NotifyError from '../notify-error/notify-error.component';
+import Spinner from '../spinner/spinner.component';
 
-import {ActivityInfoContainer, ActivityTargetTitle, ActivityTargetItemContainer, ActivityDescription, ActivityTitle, ActivityTargetContainer, ActivityTargetItem} from './activity-info.styles'
+import {
+  ActivityInfoContainer,
+  ActivitySection,
+  ActivityTargetContainer,
+  ActivityTargetItem,
+  ActivityTargetItemContainer,
+  ActivityTargetTitle,
+  ActivityTitle,
+  CloseButton,
+} from './activity-info.styles'
+
 
 const GET_ACTIVITY = gql`
   query Activity($id: ID!) {
@@ -45,10 +58,12 @@ const GET_ACTIVITY = gql`
   }
 `
 
-const ActivityInfo = ({id}) => {
+const ActivityInfo = ({id, handleClose}) => {
+  // Setup query to fetch activity info from database.
   const [getActivityInfo, {loading, error, data}] = useLazyQuery(GET_ACTIVITY);
   const [oldActivityId, setOldActivityId] = useState(null)
 
+  // Check if the activityId has changed.
   useEffect(() => {
     if (id !== oldActivityId) {
       setOldActivityId(id)
@@ -56,12 +71,11 @@ const ActivityInfo = ({id}) => {
     }
   },[id, oldActivityId, getActivityInfo])
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error...</p>
-  if (!data?.Activity) return <p>No activity selected.</p>
+  if (loading) return <Spinner />
+  if (error) return <NotifyError error={error}/>
 
-
-  const titleInfo = ['name', 'description', 'category', '__typename', 'supportTarget'] // Set which information will be removed from dropdown sections.
+  // Set which information will be removed from dropdown sections.
+  const titleInfo = ['name', 'description', 'category', '__typename', 'supportTarget', 'expectedResults', 'process'] 
   const nonTitleInfo = Object.keys(data.Activity).reduce((result, currentItem) => {
     if (!titleInfo.includes(currentItem) && data.Activity[currentItem] !== null) {
         result.push(
@@ -74,31 +88,107 @@ const ActivityInfo = ({id}) => {
     return result
   }, []);
 
+
+  const {supportTarget, name, description, expectedResults, process } = data.Activity;
+  // Display available data from the database.
   return (
     <ActivityInfoContainer>
-      <ActivityTitle>
-        {data.Activity.name}
-      </ActivityTitle>
-      <ActivityTargetContainer>
-        <ActivityTargetTitle>Target Audience:</ActivityTargetTitle>
-        <ActivityTargetItemContainer>
-          {
-            data.Activity.supportTarget.map(item => (
-              <ActivityTargetItem key={item}>{item}</ActivityTargetItem>
-            ))
-          }
-        </ActivityTargetItemContainer>
+      <CloseButton onClick={handleClose}>
+        <AiOutlineCloseCircle />
+      </CloseButton>
+      <ActivitySection>
+        <ActivityTitle>
+          {name}
+        </ActivityTitle>
+        <ActivityTargetContainer>
+          <ActivityTargetTitle>Target Audience:</ActivityTargetTitle>
+          <ActivityTargetItemContainer>
+            {
+              supportTarget.map(item => (
+                <ActivityTargetItem key={item}>{item}</ActivityTargetItem>
+              ))
+            }
+          </ActivityTargetItemContainer>
       </ActivityTargetContainer>
-      <ActivityDescription>
-        {data.Activity.description}
-      </ActivityDescription>
-      {
-        nonTitleInfo ? (
-          nonTitleInfo.map(({title, data}) => (
-            <ActivityInfoTab key={title} title={title} data={data} />
-          ))
-        ) : null
-      }
+      </ActivitySection>
+          {
+            description ? (
+              <ActivitySection>
+                <h2>Description</h2>
+                <p>{description}</p>
+              </ActivitySection>
+            ) : null
+          }
+          {
+            expectedResults ? (
+              <ActivitySection>
+                <h2>Expected Results</h2>
+                <ol>
+                  {
+                    expectedResults.map(result => {
+                      if (result.additionalInfo) {
+                        return (
+                          <>
+                            <li>{result.title}</li>
+                            <ul>
+                              {
+                                result.additionalInfo.map(additionalResult => <li>{additionalResult}</li>)
+                              }
+                            </ul>
+                          </>
+                        )
+                      } else {
+                        return (
+                          <li>{result.title}</li>
+                          )
+                        }
+                      })
+                    }
+                </ol>
+              </ActivitySection>
+            ) : null
+          }
+          {
+            process ? (
+              <ActivitySection>
+                <h2>Process</h2>
+                <ol>
+                  {
+                    process.map(step => {
+                      if (step.additionalInfo) {
+                        return (
+                          <>
+                            <li>{step.title}</li>
+                            <ul>
+                              {
+                                step.additionalInfo.map(additionalStep => <li>{additionalStep}</li>)
+                              }
+                            </ul>
+                          </>
+                        )
+                      } else {
+                        return (
+                          <li>{step.title}</li>
+                        )
+                      }
+                    })
+                  }
+                </ol>
+              </ActivitySection>
+            ) : null
+          }
+          {
+            nonTitleInfo.length > 0 ? (
+              <ActivitySection>
+                <h2>Additional Information</h2>
+                  {
+                    nonTitleInfo.map(({title, data}) => (
+                      <ActivityInfoTab key={title} title={title} data={data} />
+                    ))
+                  }
+              </ActivitySection>
+            ) : null
+          }
     </ActivityInfoContainer>
   )
 }
