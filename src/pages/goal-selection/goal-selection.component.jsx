@@ -19,7 +19,7 @@ import {
 
 const GET_GOALS = gql`
   {
-    allGoal {
+    allGoal(sort: {name: ASC}) {
       _id
       name
       category

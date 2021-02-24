@@ -20,6 +20,7 @@ export const EPAllInputs = styled.div`
 `
 
 export const EPInputGroup = styled.div`
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

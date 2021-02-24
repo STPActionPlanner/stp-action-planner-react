@@ -9,6 +9,8 @@ import {
   DropdownClose, 
   DropdownContent,
   DropdownHeader,
+  DropdownLabel,
+  DropdownMarker,
   Logo,
   Nav,
   NavContainer,
@@ -48,7 +50,10 @@ const Navbar = ({history}) => {
         </NavLink>
         <NavList>
           <NavItem onClick={() => toggleDropdown('goal')}>
-            <span>Goals ({planner.goals.length})</span>
+            <DropdownLabel>
+              <DropdownMarker>{showDropdown.goal ? "▾" : '▸'} </DropdownMarker>
+              Goals ({planner.goals.length})
+            </DropdownLabel>
             {
               showDropdown.goal ? (
                 <NavItemDropdown>
@@ -72,7 +77,10 @@ const Navbar = ({history}) => {
             }
           </NavItem>
           <NavItem onClick={() => toggleDropdown('activity')}>
-            <span>Activities ({planner.activities.length})</span>
+            <DropdownLabel>
+              <DropdownMarker>{showDropdown.activity ? "▾" : '▸'} </DropdownMarker>
+              Activities ({planner.activities.length})
+            </DropdownLabel>
             {
               showDropdown.activity ? (
                 <NavItemDropdown>

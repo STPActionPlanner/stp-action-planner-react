@@ -81,3 +81,24 @@ export const TableDataDescription = styled.td`
   }
 `
 
+export const NoTableDataContainer = styled.section`
+  width: 100%;
+  height: auto;
+  margin: 10rem 0;
+  display: flex;
+  justify-content: center;
+`
+
+export const NoTableDataContent = styled.div`
+  text-align: center;
+  max-width: 40rem;
+`
+
+export const NoTableDataTitle = styled.h1`
+  font-size: 4rem;
+`
+
+export const NoTableDataSubtitle = styled.p`
+  font-size: 2.2rem;
+`
+

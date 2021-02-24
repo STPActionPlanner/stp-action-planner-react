@@ -47,6 +47,12 @@ export const NavList = styled.ul`
 export const NavItem = styled.li`
   font-size: 1.6rem;
   position: relative;
+  line-height: 1;
+
+  &::before {
+    display: none;
+    content: '';
+  }
 `
 
 export const NavLink = styled(Link)`
@@ -98,4 +104,13 @@ export const DropdownHeader = styled.div`
 
 export const DropdownContent = styled.div`
   padding: 0 1rem 1rem 1rem;
+`
+
+export const DropdownLabel = styled.span`
+  display: flex;
+  align-items: center;
+`
+
+export const DropdownMarker = styled.span`
+  font-size: 3rem;
 `

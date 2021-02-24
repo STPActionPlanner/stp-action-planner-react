@@ -16,7 +16,7 @@ import {
 
 const GET_ACTIVITIES = gql`
   query allActivity($exArray: [ID!], $category: String) {
-    allActivity(where: {_id: {nin: $exArray}, category: {eq: $category}}) {
+    allActivity(where: {_id: {nin: $exArray}, category: {eq: $category}}, sort: {name: ASC}) {
       _id
       name
       category
@@ -54,7 +54,7 @@ const ActivityList = ({goal, toggleInfo }) => {
       const goalActivityList = planner.activities.filter(activity => activity.goalData.id !== goal.id)
       const exArray = goalActivityList.length > 0 ? goalActivityList.map(activity => activity.id) : ['1']
       const goalCategory = goal.category;
-      
+
       // Fetch data from database that doesn't include activities that are already in the activity planner.
       getNewList({variables: {exArray, category: goalCategory}})
     }

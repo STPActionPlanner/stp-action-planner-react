@@ -22,7 +22,7 @@ const PlannerContextProvider = ({children}) => {
 
   // Planner utility functions.
   const clearPlanner = () => {
-    setPlanner({ ...initialState, steps: initialState.steps, step: initialState.steps[1]});
+    setPlanner({ ...initialState, step: initialState.steps[1], steps: [...initialState.steps]});
   }
 
   const updatePlannerStep = (step) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 import ActivityInfoTab from '../activity-info-tab/activity-info-tab.component';
@@ -60,17 +60,9 @@ const GET_ACTIVITY = gql`
 
 const ActivityInfo = ({id, handleClose}) => {
   // Setup query to fetch activity info from database.
-  const [getActivityInfo, {loading, error, data}] = useLazyQuery(GET_ACTIVITY);
-  const [oldActivityId, setOldActivityId] = useState(null)
+  const {loading, error, data} = useQuery(GET_ACTIVITY, {variables: {id}});
 
-  // Check if the activityId has changed.
-  useEffect(() => {
-    if (id !== oldActivityId) {
-      setOldActivityId(id)
-      getActivityInfo({variables: {id}})
-    }
-  },[id, oldActivityId, getActivityInfo])
-
+  // Catch error and loading states and show appropriate components.
   if (loading) return <Spinner />
   if (error) return <NotifyError error={error}/>
 
