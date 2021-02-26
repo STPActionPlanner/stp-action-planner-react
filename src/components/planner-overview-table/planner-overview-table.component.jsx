@@ -27,7 +27,7 @@ const PlannerOverviewTable = ({plannerOverview}) => {
         <Table>
             <TableHeadingContainer>
               <tr data-export-style="heading-row">
-                <TableHeadingItem data-export-style="heading" export={true} sm>Action / Initiative</TableHeadingItem>
+                <TableHeadingItem data-export-style="heading" export={true} sm>Activity</TableHeadingItem>
                 <TableHeadingItem data-export-style="heading" export={true} md>Description</TableHeadingItem>
                 <TableHeadingItem data-export-style="heading" export={true} lg>Process</TableHeadingItem>
                 <TableHeadingItem data-export-style="heading" export={false}>Person Responsible</TableHeadingItem>
