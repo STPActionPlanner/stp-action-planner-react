@@ -12,10 +12,11 @@ export const TableHeadingContainer = styled.thead`
 
 export const TableHeadingItem = styled.th`
   display: ${props => props.sm ? "table-cell" : "none"};
-  padding: 1rem 2rem;
+  padding: 1rem 5rem;
   font-size: 1.6rem;
   color: ${props => props.theme.colors.white};
   text-align: center;
+  white-space: nowrap;
 
   @media only screen and (min-width: 40em) {
     display: ${props => props.sm || props.md ? "table-cell" : "none"};
